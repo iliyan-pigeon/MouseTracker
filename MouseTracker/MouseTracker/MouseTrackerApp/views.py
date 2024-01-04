@@ -1,25 +1,30 @@
 import pyautogui
+from django.shortcuts import render
 from pynput.mouse import Listener, Button
 import cv2
+from threading import Thread
+
+
+def index(request):
+    thread = Thread(target=start_listener)
+    thread.start()
+    return render(request, 'MouseTrackerApp/initial.html')
+
 
 def take_photo():
-    # Initialize the camera (0 represents the default camera, change if you have multiple)
     camera = cv2.VideoCapture(0)
 
     if not camera.isOpened():
         print("Cannot open camera")
         return None
 
-    # Read a frame from the camera
     ret, frame = camera.read()
 
     if ret:
-        # Save the captured frame as an image file
-        img_filename = 'captured_image.jpg'  # Change the filename as needed
+        img_filename = 'captured_image.jpg'
         cv2.imwrite(img_filename, frame)
         print(f"Image captured and saved as {img_filename}")
 
-    # Release the camera
     camera.release()
     return frame
 
@@ -32,5 +37,6 @@ def on_click(x, y, button, pressed):
         print(f"Left button clicked at ({x}, {y}). Current position: ({current_x}, {current_y})")
 
 
-with Listener(on_click=on_click) as listener:
-    listener.join()
+def start_listener():
+    with Listener(on_click=on_click) as listener:
+        listener.join()

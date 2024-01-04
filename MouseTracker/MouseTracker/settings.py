@@ -35,7 +35,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'channels',
-    
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,6 +45,8 @@ INSTALLED_APPS = [
 
     'MouseTracker.MouseTrackerApp'
 ]
+
+ASGI_APPLICATION = 'MouseTrackerApp.asgi.application'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -61,7 +63,7 @@ ROOT_URLCONF = 'MouseTracker.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
+        'DIRS': [BASE_DIR / 'MouseTrackerApp/templates']
         ,
         'APP_DIRS': True,
         'OPTIONS': {
