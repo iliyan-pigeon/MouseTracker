@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'MouseTracker.MouseTrackerApp'
 ]
 
-ASGI_APPLICATION = 'MouseTrackerApp.asgi.application'
+ASGI_APPLICATION = 'MouseTracker.asgi.application'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

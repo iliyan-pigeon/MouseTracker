@@ -40,3 +40,4 @@ def on_click(x, y, button, pressed):
 def start_listener():
     with Listener(on_click=on_click) as listener:
         listener.join()
+
