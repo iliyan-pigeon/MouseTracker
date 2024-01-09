@@ -5,16 +5,24 @@
     <title>Initial</title>
 </head>
 <body>
-    <p>hello</p>
-    <script type="text/javascript">
-        let url = `ws://${window.location.host}/ws/socket-server/`
+    <p id="mouse-position"></p>
+    <script>
+        const socket = new WebSocket('http://127.0.0.1:8000/ws/socket-server/'); // Replace with your server URL
 
-        const theSocket = new WebSocket(url)
+        socket.onopen = function(event) {
+            console.log('WebSocket connection established.');
+        };
 
-        theSocket.onmessage = function(e){
-            let data = JSON.parse(e.data)
-            console.log('Data:', data)
-        }
+        socket.onmessage = function(event) {
+            const positionData = JSON.parse(event.data);
+
+            // Update HTML content with live mouse position
+            document.getElementById('mouse-position').innerText = `X: ${positionData.x}, Y: ${positionData.y}`;
+        };
+
+        socket.onclose = function(event) {
+            console.log('WebSocket connection closed.');
+        };
     </script>
 </body>
 </html>
